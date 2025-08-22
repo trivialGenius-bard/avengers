@@ -1,0 +1,103 @@
+.mutable-blur {
+	filter: blur(10px) !important;
+	opacity: 0.5 !important;
+}
+
+.mutable-blur > * {
+	pointer-events: none !important;
+}
+
+.mutable-blur-explanation {
+	position: relative;
+}
+
+.mutable-blur-explanation::after {
+	text-align: center;
+	content: 'Muted by Mutable\A Contains: "' attr(data-mutable-match) '"';
+	white-space: pre-wrap;
+	box-sizing: border-box;
+	font-size: 18px !important;
+	color: transparent;
+	font-family: "Helvetica", "Arial", sans-serif !important;
+	font-weight: normal !important;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: linear-gradient(to right, #e5cfee, #baecff, #efddcf, #ddf1d1, #f2d5d7);
+	-webkit-background-clip: text;
+	background-clip: text;
+	backdrop-filter: blur(10px) brightness(80%) !important;
+	-webkit-backdrop-filter: blur(10px) brightness(80%) !important;
+	z-index: 3;
+}
+
+
+.mutable-hide {
+	display: none !important;
+}
+
+.mutable-image-overlay {
+	position: relative;
+}
+
+.mutable-image-overlay::after {
+	box-sizing: border-box;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: '';
+	background-image: var(--overlay-image);
+	background-size: cover;
+	background-position: center;
+	z-index: 1001;
+}
+
+#mutable-debug-window {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	bottom: 0;
+	right: 15px;
+	min-width: 200px;
+	max-width: 50%;
+	min-height: 100px;
+	max-height: 50%;
+	background: rgba(255, 255, 255, 0.70);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgba(0, 0, 0, 0.50);
+	padding: 10px;
+	padding-bottom: 15px;
+	font-family: "Helvetica", "Arial", sans-serif;
+	border-radius: 10px 10px 0 0;
+	z-index: 1000000;
+	font-size: 15px;
+	color: black;
+}
+
+.mutable-debug-title {
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+#mutable-debug-window > :not(:last-child) {
+	margin-bottom: 5px;
+}
+
+.mutable-debug-post {
+	border-style: solid !important;
+	border-width: 2px !important;
+	border-image: linear-gradient(to bottom, #ff8ff0, #70f8ff, #81ff92) 30 !important;
+}

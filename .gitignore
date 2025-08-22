@@ -1,0 +1,8 @@
+
+.DS_Store
+mutable-packaged.zip
+Mutable/Mutable.xcodeproj/xcuserdata/
+Mutable/Mutable.xcodeproj/project.xcworkspace/xcuserdata/idrees.xcuserdatad/UserInterfaceState.xcuserstate
+node_modules/
+Mutable.code-workspace
+docs/_site/

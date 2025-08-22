@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../Style.css">
+    <script src="../Script.js" defer></script>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="container">
+        <div id="title-container">
+            <div id="title">Mutable</div>
+            <div id="tagline">Turn Down the Noise</div>
+        </div>
+        <div id="enable-window" class="window">
+            <div class="window-top-bar">
+                <div class="window-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="window-title">how to enable</div>
+                <div class="window-controls">
+                    <div class="window-button left-window-button"></div>
+                    <div class="window-button right-window-button"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <p class="platform-ios">You can turn on Mutable’s Safari extension in Settings by going to Settings → Safari → Extensions → Mutable</p>
+                <p class="platform-mac state-unknown">You can turn on Mutable’s extension in Safari Extensions preferences.</p>
+                <p class="platform-mac state-on">Mutable’s extension is currently on. You can turn it off in Safari Extensions preferences.</p>
+                <p class="platform-mac state-off">Mutable’s extension is currently off. You can turn it on in Safari Extensions preferences.</p>
+                <center>
+                    <button class="open-preferences">
+                        <span class="platform-mac">Open Safari Settings</span>
+                        <span class="platform-ios">Open Settings</span>
+                    </button>
+                </center>
+                <p class="platform-ios">Open the Settings app and scroll down to the "Safari" section</p>
+                <image class="platform-ios" src="../ios-settings.jpg" />
+                <p class="platform-ios">Scroll down to the "General" category and tap on "Extensions"</p>
+                <image class="platform-ios" src="../ios-safari-settings.jpg" />
+                <p class="platform-ios">Tap on "Mutable"</p>
+                <image class="platform-ios" src="../ios-extension-settings.png" />
+                <p class="platform-ios">Enable the extension and allow access to all websites</p>
+                <image class="platform-ios" src="../ios-mutable-settings.png" />
+            </div>
+        </div>
+        <div id="mute-window" class="window">
+            <div class="window-top-bar">
+                <div class="window-icon">
+                    <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.16666 4.16667L5 7.5H1.66666V12.5H5L9.16666 15.8333V4.16667Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19.1667 7.5L14.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.1667 7.5L19.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                </div>
+                <div class="window-title">how to use</div>
+                <div class="window-controls">
+                    <div class="window-button left-window-button"></div>
+                    <div class="window-button right-window-button"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <p class="platform-ios">
+                    Using Mutable is as simple as opening Safari and clicking the website settings icon in the bottom left next to the URL (circled below).
+                </p>
+                <image class="platform-ios" src="../ios-extension-example.png" />
+                <p class="platform-ios">
+                    From there, click "Mutable" and give it permissions to run on every page so that it can detect social media sites. If Mutable isn't listed, be sure to follow the directions above for enabling it via settings first!
+                </p>
+                <image class="platform-ios" src="../ios-safari-menu.png" />
+                <p class="platform-mac">Using Mutable is as easy as opening Safari and clicking the Mutable icon next to the search bar (circled below).</p>
+                <image class="platform-mac" src="../mac-extension-example.png" />
+                <p>Once Mutable is installed and enabled, just add some keywords to the mute list and visit any site to try it out! You can select from multiple options when choosing how Mutable deals with offending posts, from blurring or hiding them to even replacing them with pictures of cute animals! And if you'd rather have Mutable only run on sites you select, toggle "Enable by Default" to false and manually enable each site.</p>
+                <p>Enjoy, and if you have any questions or concerns feel free to contact me at <a href="mailto: idrees+mutable@idreesinc.com">idrees+mutable@idreesinc.com</a></p>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="signature">made with ❤️ by idrees</div>
+        </div>
+    </div>
+    <div id="modal-container">
+        <div id="add-word-modal" class="window">
+            <div class="window-top-bar">
+                <div class="window-icon">
+                    <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.16666 4.16667L5 7.5H1.66666V12.5H5L9.16666 15.8333V4.16667Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19.1667 7.5L14.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.1667 7.5L19.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                </div>
+                <div class="window-title">mute a word</div>
+                <div class="window-controls">
+                    <div class="window-button left-window-button"></div>
+                    <div class="window-button right-window-button"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                Type in the word or phrase that you wish to mute:
+                <input id="add-word-input" class="settings-text-input keyword-input" type="text" placeholder="eg. tulips">
+                <div class="settings-block">
+                    case sensitive
+                    <label class="toggle-switch settings-toggle">
+                        <input id="add-word-case-sensitive" type="checkbox">
+                        <span class="toggle-inner settings-toggle-inner"></span>
+                    </label>
+                </div>
+                <div class="button-block">
+                    <div id="add-word-submit" class="submit-button">
+                        add to mute list
+                    </div>
+                    <div id="add-word-cancel" class="cancel-button">
+                        never mind
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
