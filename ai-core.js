@@ -1,30 +1,26 @@
-// ai-core.js
+// ai-core.js – Browser/Chrome Extension version
 import * as tf from "@tensorflow/tfjs";
 import { AutoTokenizer } from "@xenova/transformers";
 
-// Если в Node.js, раскомментируй
-// import * as tf from "@tensorflow/tfjs-node";
-
+// Хранилища загруженных моделей и токенайзеров
 const loadedModels = {};
 const loadedTokenizers = {};
 
 /**
  * Универсальный загрузчик модели
+ * Использует chrome.runtime.getURL для доступа к ресурсам в расширении
  */
 export async function loadModel(modelName) {
   if (loadedModels[modelName]) return loadedModels[modelName];
 
   try {
-    const modelPath = `/models/${modelName}/model.json`;
-    const nodePath = `file://models/${modelName}/model.json`;
-    const isNode = typeof window === "undefined";
-
-    const model = await tf.loadGraphModel(isNode ? nodePath : modelPath);
-    console.log(`✅ Модель '${modelName}' загружена`);
+    const modelUrl = chrome.runtime.getURL(models/${modelName}/model.json);
+    const model = await tf.loadGraphModel(modelUrl);
+    console.log(✅ Модель '${modelName}' загружена);
     loadedModels[modelName] = model;
     return model;
   } catch (err) {
-    console.error(`❌ Ошибка загрузки модели '${modelName}':`, err);
+    console.error(❌ Ошибка загрузки модели '${modelName}':, err);
     throw err;
   }
 }
@@ -36,13 +32,14 @@ export async function loadTokenizer(modelName) {
   if (loadedTokenizers[modelName]) return loadedTokenizers[modelName];
 
   try {
-    const tokenizerPath = `models/${modelName}`;
-    const tokenizer = await AutoTokenizer.from_pretrained(tokenizerPath);
-    console.log(`✅ Токенайзер '${modelName}' загружен`);
+    // В transformers-web токенайзер можно грузить из "pretrained" папки
+    const tokenizerUrl = chrome.runtime.getURL(models/${modelName});
+    const tokenizer = await AutoTokenizer.from_pretrained(tokenizerUrl);
+    console.log(✅ Токенайзер '${modelName}' загружен);
     loadedTokenizers[modelName] = tokenizer;
     return tokenizer;
   } catch (err) {
-    console.error(`❌ Ошибка загрузки токенайзера '${modelName}':`, err);
+    console.error(❌ Ошибка загрузки токенайзера '${modelName}':, err);
     throw err;
   }
 }
@@ -57,7 +54,7 @@ async function runModel(modelName, text) {
   const encoded = await tokenizer(text, {
     padding: true,
     truncation: true,
-    return_tensors: "tf",
+    return_tensors: "tf", // браузерный tfjs это понимает
   });
 
   const output = model.execute(encoded);
@@ -84,24 +81,5 @@ export async function analyzeText({ text, aiSettings }) {
   return results.reduce((acc, r) => Object.assign(acc, r), {});
 }
 
-/**
- * Пример использования
- */
-async function demo() {
-  const result = await analyzeText({
-    text: "Oh, great, another meeting. Just what I needed.",
-    aiSettings: {
-      sarcasm: true,
-      detoxify: true,
-      depression: true,
-      zeroshot: true,
-    },
-  });
-
-  console.log("Результат анализа:", result);
-}
-
-// Автозапуск
-if (import.meta.url === `file://${process.argv[1]}`) {
-  demo();
-}
+// ⚠️ В браузерной версии мы НЕ делаем автозапуск (demo),
+// потому что этот модуль подключается из background.js
