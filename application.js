@@ -1,4 +1,4 @@
-var aiEnabled = false;
+var aiEnabled = true;
 // @ts-check
 /// <reference path="shared.js" />
 
@@ -437,7 +437,7 @@ async function parse() {
             }
         }
     }
-    updateDebugWindow(parsersApplied.length > 0 ? parsersApplied.join(", ") : "none");
+    updateDebugWindow(parsersApplied.length > 0?parsersApplied.join(", ") : "none");
 }
 
 /**
@@ -500,23 +500,54 @@ async function match(post) {
     // Deep pass: Check if AI is enabled
     if (aiEnabled) {
         try {
-            // Send text to background.js for neural model processing
-            const response = await new Promise((resolve) => {
+            // Define aiSettings (example: enable all models; customize based on user settings)
+            console.log("Try AI");
+            const aiSettings = {
+                sarcasm: true,
+                detoxify: true,
+                depression: true,
+                zeroshot: true
+            };
+
+            // Generate unique requestId
+            const requestId = Date.now().toString();
+
+            // Send to background.js
+            const response = await new Promise((resolve, reject) => {
                 chrome.runtime.sendMessage({
-                        type: 'processModel',
-                        data: contents
-                    },
-                    (response) => {
-                        resolve(response);
-                    }
-                );
+                    type: 'AI_ANALYZE_TEXT',
+                    text: contents || '', // Use post contents as text
+                    aiSettings,
+                    requestId
+                }, (resp) => {
+                    if (chrome.runtime.lastError) {
+                        reject(new Error(chrome.runtime.lastError.message));
+                    } else {
+                        resolve(resp);
+                    };
+                    console.log("Responce: ", resp.text)
+                });
             });
 
-            // Return the matched word from AI (if any) or null
-            return response && response.isMatch ? response.matchedWord || null : null;
+            // Interpret results (example logic: match if any score > 0.5)
+            const results = response.results || {};
+            let isMatch = false;
+            let matchedWord = null;
+
+            // Check each category
+            for (const [category, scores] of Object.entries(results)) {
+                const maxScore = Math.max(...(Array.isArray(scores)?scores.flat() : [0])); // Assume scores are arrays
+                if (maxScore > 0.5) { // Threshold; adjust as needed
+                    isMatch = true;
+                    matchedWord = category; // e.g., "sarcasm" as matchedWord
+                    break; // Or collect all
+                }
+            }
+
+            return isMatch?matchedWord : null;
         } catch (error) {
-            console.error('Error communicating with background.js:', error);
-            return null; // Fallback to null on error
+            console.error('Error in AI deep pass:', error);
+            return null; // Fallback
         }
     }
 
