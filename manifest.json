@@ -5,9 +5,9 @@
     "version": "2.0.0",
     "homepage_url": "https://idreesinc.com",
     "icons": {
-        "48": "icons/foil-48.png",
-        "96": "icons/foil-96.png",
-        "128": "icons/foil-128.png"
+        "48": "icons/main-48.png",
+        "96": "icons/main-96.png",
+        "128": "icons/main-128.png"
     },
     "content_scripts": [{
         "matches": ["<all_urls>"],

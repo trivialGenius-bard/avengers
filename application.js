@@ -2,250 +2,6 @@ var aiEnabled = false;
 // @ts-check
 /// <reference path="shared.js" />
 
-const kittens = [{
-        "name": "1",
-        "src": "https://unsplash.com/photos/Y0WXj3xqJz0"
-    },
-    {
-        "name": "2",
-        "src": "https://unsplash.com/photos/WNoYQaAtCfo"
-    },
-    {
-        "name": "3",
-        "src": "https://unsplash.com/photos/uhnZZUaTIOs"
-    },
-    {
-        "name": "4",
-        "src": "https://unsplash.com/photos/bhonzdJMVjY"
-    },
-    {
-        "name": "5",
-        "src": "https://unsplash.com/photos/lAjk-UJa85c"
-    },
-    {
-        "name": "6",
-        "src": "https://unsplash.com/photos/klH-f7mw2Ws"
-    },
-    {
-        "name": "7",
-        "src": "https://unsplash.com/photos/_867Jy8LCkI"
-    },
-    {
-        "name": "8",
-        "src": "https://unsplash.com/photos/7nPxC8id3Ss"
-    },
-    {
-        "name": "9",
-        "src": "https://unsplash.com/photos/eSceitc-s30"
-    },
-    {
-        "name": "10",
-        "src": "https://unsplash.com/photos/MJymGVEazyY"
-    },
-    {
-        "name": "11",
-        "src": "https://unsplash.com/photos/jMOSPjsZXtg"
-    },
-    {
-        "name": "12",
-        "src": "https://unsplash.com/photos/ZJWUZ6JKAF0"
-    },
-    {
-        "name": "13",
-        "src": "https://unsplash.com/photos/rxvocsh0DUw"
-    },
-    {
-        "name": "14",
-        "src": "https://unsplash.com/photos/OmWw4SfE2DI"
-    },
-    {
-        "name": "15",
-        "src": "https://unsplash.com/photos/Px2Y-sio6-c"
-    },
-    {
-        "name": "16",
-        "src": "https://unsplash.com/photos/bXnoQq1sIBM"
-    },
-    {
-        "name": "17",
-        "src": "https://unsplash.com/photos/WHTLPrTPBk0"
-    },
-    {
-        "name": "18",
-        "src": "https://unsplash.com/photos/7qNZYwUbPic"
-    },
-    {
-        "name": "19",
-        "src": "https://unsplash.com/photos/VpzlatUJFfo"
-    },
-    {
-        "name": "20",
-        "src": "https://unsplash.com/photos/SAKLELG-pO8"
-    }
-];
-const puppies = [{
-        "name": "1",
-        "src": "https://unsplash.com/photos/fk4tiMlDFF0"
-    },
-    {
-        "name": "2",
-        "src": "https://unsplash.com/photos/9LkqymZFLrE"
-    },
-    {
-        "name": "3",
-        "src": "https://unsplash.com/photos/atOlntWcO4k"
-    },
-    {
-        "name": "4",
-        "src": "https://unsplash.com/photos/Qb7D1xw28Co"
-    },
-    {
-        "name": "5",
-        "src": "https://unsplash.com/photos/k4vhuUHv08o"
-    },
-    {
-        "name": "6",
-        "src": "https://unsplash.com/photos/eoqnr8ikwFE"
-    },
-    {
-        "name": "7",
-        "src": "https://unsplash.com/photos/wxfZi8eYdEk"
-    },
-    {
-        "name": "8",
-        "src": "https://unsplash.com/photos/m8v7BDLV8yE"
-    },
-    {
-        "name": "9",
-        "src": "https://unsplash.com/photos/z_U6bPp_Rjg"
-    },
-    {
-        "name": "10",
-        "src": "https://unsplash.com/photos/zr0beNrnvgQ"
-    },
-    {
-        "name": "11",
-        "src": "https://unsplash.com/photos/vMNr5gbeeTk"
-    },
-    {
-        "name": "12",
-        "src": "https://unsplash.com/photos/ORzQG8jKOO4"
-    },
-    {
-        "name": "13",
-        "src": "https://unsplash.com/photos/TzjMd7i5WQI"
-    },
-    {
-        "name": "14",
-        "src": "https://unsplash.com/photos/DsGeUBaJPwc"
-    },
-    {
-        "name": "15",
-        "src": "https://unsplash.com/photos/JK8w20Zantg"
-    },
-    {
-        "name": "16",
-        "src": "https://unsplash.com/photos/oO5MBxRCadY"
-    },
-    {
-        "name": "17",
-        "src": "https://unsplash.com/photos/6uPsI12Xqjk"
-    },
-    {
-        "name": "18",
-        "src": "https://unsplash.com/photos/AsCYNjt6IF0"
-    },
-    {
-        "name": "19",
-        "src": "https://unsplash.com/photos/7T8ammfU8-s"
-    },
-    {
-        "name": "20",
-        "src": "https://unsplash.com/photos/VQPD1fc_Y8g"
-    }
-];
-const hedgehogs = [{
-        "name": "1",
-        "src": "https://unsplash.com/photos/D09Nooc3XQw"
-    },
-    {
-        "name": "2",
-        "src": "https://unsplash.com/photos/OMCgkp1oZ3Q"
-    },
-    {
-        "name": "3",
-        "src": "https://unsplash.com/photos/aM7r5lqKhiY"
-    },
-    {
-        "name": "4",
-        "src": "https://unsplash.com/photos/eHMLxD3W_m4"
-    },
-    {
-        "name": "5",
-        "src": "https://unsplash.com/photos/8wkkhqEYN0A"
-    },
-    {
-        "name": "6",
-        "src": "https://unsplash.com/photos/k_E7DpVgftw"
-    },
-    {
-        "name": "7",
-        "src": "https://unsplash.com/photos/iJ9o00UeAWk"
-    },
-    {
-        "name": "8",
-        "src": "https://unsplash.com/photos/GXMr7BadXQo"
-    },
-    {
-        "name": "9",
-        "src": "https://unsplash.com/photos/dktikEL51dM"
-    },
-    {
-        "name": "10",
-        "src": "https://unsplash.com/photos/g5tj75PJ4w4"
-    },
-    {
-        "name": "11",
-        "src": "https://unsplash.com/photos/MrCsc_ZL5dU"
-    },
-    {
-        "name": "12",
-        "src": "https://unsplash.com/photos/QWELA5fl1KY"
-    },
-    {
-        "name": "13",
-        "src": "https://unsplash.com/photos/6apx2KP_SEo"
-    },
-    {
-        "name": "14",
-        "src": "https://unsplash.com/photos/zjHbH8vkhgk"
-    },
-    {
-        "name": "15",
-        "src": "https://unsplash.com/photos/S6BR5GOqB4A"
-    },
-    {
-        "name": "16",
-        "src": "https://unsplash.com/photos/60QYdXjUd8o"
-    },
-    {
-        "name": "17",
-        "src": "https://unsplash.com/photos/lO9UKYIbV_g"
-    },
-    {
-        "name": "18",
-        "src": "https://unsplash.com/photos/qbFyc2w9q90"
-    },
-    {
-        "name": "19",
-        "src": "https://unsplash.com/photos/jczICIeZtos"
-    },
-    {
-        "name": "20",
-        "src": "https://unsplash.com/photos/JnZWFenBmx0"
-    }
-];
-
 /** @type {Settings} */
 let settings = new Settings();
 let shuffledBag = [];
@@ -544,44 +300,60 @@ function hidePost(element, reason) {
             }
         });
     } else if (settings.globalMuteAction === "blur-preview") {
-        element.classList.add("mutable-blur-explanation");
-        element.setAttribute("data-mutable-match", reason);
-        element.addEventListener("click", function(event) {
-            if (element.classList.contains("mutable-blur-explanation")) {
-                element.classList.remove("mutable-blur-explanation");
-                event.stopPropagation();
-                event.preventDefault();
-                // Remove from children too
-                for (let child of element.querySelectorAll(".mutable-blur-explanation")) {
-                    if (child instanceof HTMLElement) {
-                        child.classList.remove("mutable-blur-explanation");
-                    }
-                }
-            }
-        });
+    	// Check if element is already wrapped to prevent duplicate processing
+    	if (element.parentNode && element.parentNode.classList && element.parentNode.classList.contains("mutable-wrapper")) {
+    		return; // Already processed
+    	}
+    	
+    	element.classList.add("mutable-blur");
+    	
+    	// Create wrapper to hold both the element and tag
+    	const wrapper = document.createElement("div");
+    	wrapper.className = "mutable-wrapper";
+    	wrapper.style.cssText = `
+    		position: relative !important;
+    		display: block !important;
+    		width: 100% !important;
+    		margin: 0 !important;
+    		padding: 0 !important;
+    		border: none !important;
+    		background: transparent !important;
+    		box-sizing: border-box !important;
+    		overflow: visible !important;
+    		z-index: 1 !important;
+    	`;
+    	
+    	// Create tag element
+    	const tagElement = document.createElement("div");
+    	tagElement.className = "mutable-trigger-tag";
+    	tagElement.textContent = reason;
+    	
+    	// Insert wrapper before the element
+    	element.parentNode.insertBefore(wrapper, element);
+    	// Move element into wrapper
+    	wrapper.appendChild(element);
+    	// Add tag to wrapper (not to the blurred element)
+    	wrapper.appendChild(tagElement);
+    	
+    	element.addEventListener("click", function(event) {
+    		if (element.classList.contains("mutable-blur")) {
+    			element.classList.remove("mutable-blur");
+    			// Remove wrapper and restore original structure
+    			const parent = wrapper.parentNode;
+    			parent.insertBefore(element, wrapper);
+    			wrapper.remove();
+    			event.stopPropagation();
+    			event.preventDefault();
+    			// Remove from children too
+    			for (let child of element.querySelectorAll(".mutable-blur")) {
+    				if (child instanceof HTMLElement) {
+    					child.classList.remove("mutable-blur");
+    				}
+    			}
+    		}
+    	});
     } else if (settings.globalMuteAction === "hide") {
         element.classList.add("mutable-hide");
-    } else if (settings.globalMuteAction === "kittens") {
-        element.classList.add("mutable-image-overlay");
-        const kittenSrc = chrome.runtime.getURL(`./images/kittens/${kittens[getIndexFromBag(kittens.length)].name}.jpg`);
-        element.style.setProperty("--overlay-image", `url("${kittenSrc}")`);
-        element.addEventListener("click", function(event) {
-            removeOverlay(element, event);
-        });
-    } else if (settings.globalMuteAction === "puppies") {
-        element.classList.add("mutable-image-overlay");
-        const puppySrc = chrome.runtime.getURL(`./images/puppies/${puppies[getIndexFromBag(puppies.length)].name}.jpg`);
-        element.style.setProperty("--overlay-image", `url("${puppySrc}")`);
-        element.addEventListener("click", function(event) {
-            removeOverlay(element, event);
-        });
-    } else if (settings.globalMuteAction === "hedgehogs") {
-        element.classList.add("mutable-image-overlay");
-        const hedgehogSrc = chrome.runtime.getURL(`./images/hedgehogs/${hedgehogs[getIndexFromBag(hedgehogs.length)].name}.jpg`);
-        element.style.setProperty("--overlay-image", `url("${hedgehogSrc}")`);
-        element.addEventListener("click", function(event) {
-            removeOverlay(element, event);
-        });
     } else {
         console.error(`Unknown global mute action, defaulting to 'blur': ${settings.globalMuteAction}`);
         element.classList.add("mutable-blur");
@@ -661,8 +433,21 @@ function resetPosts() {
         post.removeAttribute(PROCESSED_INDICATOR);
         post.classList.remove("mutable-blur");
         post.classList.remove("mutable-hide");
-        post.classList.remove("mutable-blur-explanation");
         post.classList.remove("mutable-image-overlay");
+        
+        // Check if post is wrapped and restore original structure
+        const wrapper = post.parentNode;
+        if (wrapper && wrapper.querySelector && wrapper.querySelector(".mutable-trigger-tag")) {
+            const grandParent = wrapper.parentNode;
+            if (grandParent) {
+                grandParent.insertBefore(post, wrapper);
+                wrapper.remove();
+            }
+        }
+        
+        // Remove any remaining trigger tags
+        const tags = document.querySelectorAll(".mutable-trigger-tag");
+        tags.forEach(tag => tag.remove());
     }
 }
 
