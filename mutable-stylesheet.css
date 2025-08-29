@@ -7,35 +7,6 @@
 	pointer-events: none !important;
 }
 
-.mutable-blur-explanation {
-	position: relative;
-}
-
-.mutable-blur-explanation::after {
-	text-align: center;
-	content: 'Muted by Mutable\A Contains: "' attr(data-mutable-match) '"';
-	white-space: pre-wrap;
-	box-sizing: border-box;
-	font-size: 18px !important;
-	color: transparent;
-	font-family: "Helvetica", "Arial", sans-serif !important;
-	font-weight: normal !important;
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-image: linear-gradient(to right, #e5cfee, #baecff, #efddcf, #ddf1d1, #f2d5d7);
-	-webkit-background-clip: text;
-	background-clip: text;
-	backdrop-filter: blur(10px) brightness(80%) !important;
-	-webkit-backdrop-filter: blur(10px) brightness(80%) !important;
-	z-index: 3;
-}
-
 
 .mutable-hide {
 	display: none !important;
@@ -101,3 +72,97 @@
 	border-width: 2px !important;
 	border-image: linear-gradient(to bottom, #ff8ff0, #70f8ff, #81ff92) 30 !important;
 }
+
+/* Cursor pointer for blurred content */
+.mutable-blur {
+	cursor: pointer !important;
+	transition: all 0.3s ease;
+}
+
+.mutable-blur:hover {
+	cursor: pointer !important;
+	opacity: 0.7 !important;
+}
+
+/* Additional styles for other blurred/muted elements */
+[data-blurred="true"],
+.muted-content {
+	cursor: pointer !important;
+	transition: all 0.3s ease;
+}
+
+[data-blurred="true"]:hover,
+.muted-content:hover {
+	cursor: pointer !important;
+	opacity: 0.8;
+}
+
+/* Wrapper styles for trigger tags */
+.mutable-wrapper {
+	position: relative !important;
+	display: block !important;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	background: transparent !important;
+	box-sizing: border-box !important;
+	overflow: visible !important;
+	z-index: 1 !important;
+}
+
+/* Trigger tag styles */
+.mutable-trigger-tag {
+	position: absolute !important;
+	top: 50% !important;
+	left: 50% !important;
+	right: auto !important;
+	bottom: auto !important;
+	transform: translate(-50%, -50%) !important;
+	background: #cccccc !important;
+	color: white !important;
+	padding: 4px 8px !important;
+	margin: 0 !important;
+	border-radius: 12px !important;
+	font-size: 12px !important;
+	font-family: "Helvetica", "Arial", sans-serif !important;
+	font-weight: 500 !important;
+	font-style: normal !important;
+	text-decoration: none !important;
+	text-transform: none !important;
+	text-align: center !important;
+	white-space: nowrap !important;
+	box-shadow: 0 2px 6px rgba(218, 218, 218, 0.3) !important;
+	border: 1px solid white !important;
+	border-radius: 12px !important;
+	z-index: 999999 !important;
+	pointer-events: none !important;
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+	height: 20px !important;
+	line-height: 12px !important;
+	min-width: 20px !important;
+	max-width: none !important;
+	width: auto !important;
+	transition: none !important;
+	animation: none !important;
+	float: none !important;
+	clear: none !important;
+	overflow: visible !important;
+	clip: auto !important;
+	filter: none !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+/* Block any pseudo-elements that might interfere */
+.mutable-wrapper::before,
+.mutable-wrapper::after,
+.mutable-blur::before,
+.mutable-blur::after {
+	display: none !important;
+	content: none !important;
+	visibility: hidden !important;
+}
+
