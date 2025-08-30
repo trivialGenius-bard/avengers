@@ -259,10 +259,10 @@ async function match(post) {
             // Define aiSettings (example: enable all models; customize based on user settings)
             console.log("Try AI");
             const aiSettings = {
-                sarcasm: true,
+                sarcasm: false,
                 detoxify: true,
-                depression: true,
-                zeroshot: true
+                depression: false,
+                zeroshot: false
             };
 
             // Generate unique requestId
@@ -280,22 +280,28 @@ async function match(post) {
                         reject(new Error(chrome.runtime.lastError.message));
                     } else {
                         resolve(resp);
+                        console.log("Responce: ", resp.results);
+
                     };
-                    console.log("Responce: ", resp.text)
                 });
             });
 
             // Interpret results (example logic: match if any score > 0.5)
             const results = response.results || {};
+            console.log("Response type: ", response.type, " Results type: ", results.type)
+
             let isMatch = false;
             let matchedWord = null;
 
             // Check each category
             for (const [category, scores] of Object.entries(results)) {
                 const maxScore = Math.max(...(Array.isArray(scores)?scores.flat() : [0])); // Assume scores are arrays
-                if (maxScore > 0.5) { // Threshold; adjust as needed
+                //console.log("max score: ", maxScore)
+
+                if (maxScore > 0.2) { // Threshold; adjust as needed
                     isMatch = true;
                     matchedWord = category; // e.g., "sarcasm" as matchedWord
+                    console.log("Matching result: ", isMatch, ", reason:", matchedWord)
                     break; // Or collect all
                 }
             }
@@ -310,6 +316,61 @@ async function match(post) {
     // No match found in either pass
     return null;
 }
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    // --- ДЕБАГ: Логируем всё входящее сообщение ---
+    console.log("[DEBUG_APP] 1. Получено сообщение в content script (application.js):", message);
+    console.log("[DEBUG_APP] 1a. Тип message:", typeof message);
+    // --- КОНЕЦ ДЕБАГА ---
+
+    // --- ИСПРАВЛЕНИЕ: Правильная обработка AI_ANALYSIS_RESULT ---
+    if (message && message.action === "AI_ANALYSIS_RESULT") {
+        console.log("[DEBUG_APP] 2. Сообщение является результатом AI анализа (AI_ANALYSIS_RESULT).");
+
+        // Извлекаем объект результата, отправленный background.js
+        // Ожидаемый формат: message.result = { isMatch: boolean, matchedWord: string, ... }
+        const analysisResult = message.result;
+
+        console.log("[DEBUG_APP] 3. Содержимое message.result:", analysisResult);
+        console.log("[DEBUG_APP] 3a. Тип message.result:", typeof analysisResult);
+
+        if (analysisResult && typeof analysisResult === 'object') {
+            console.log("[DEBUG_APP] 4. message.result является объектом.");
+
+            // Проверяем флаг isMatch, отправленный background.js после анализа и проверки порогов
+            const isMatch = analysisResult.isMatch;
+            const matchedWord = analysisResult.matchedWord;
+
+            console.log("[DEBUG_APP] 5. isMatch:", isMatch);
+            console.log("[DEBUG_APP] 6. matchedWord:", matchedWord);
+
+            // --- ЛОГИКА ПРИНЯТИЯ РЕШЕНИЯ ---
+            // Если background.js установил isMatch в true, значит, текст соответствует критериям
+            if (isMatch === true) {
+                console.log("[DEBUG_APP] 🚨 ФЛАГ isMatch установлен в TRUE. Применяем блюр.");
+                // --- ВЫЗОВ ФУНКЦИИ БЛЮРА ---
+                // Предполагается, что функция applyBlur определена где-то выше в application.js
+                // и реализует логику скрытия/размытия элементов.
+                if (typeof applyBlur === 'function') {
+                    applyBlur(); // Вызываем функцию блюра
+                    console.log("[DEBUG_APP] ✅ Функция applyBlur() была вызвана.");
+                } else {
+                    console.error("[DEBUG_APP] ❌ Функция applyBlur не найдена!");
+                }
+            } else {
+                console.log("[DEBUG_APP] ✅ ФЛАГ isMatch НЕ установлен (false/undefined). Блюр не применяется.");
+            }
+            // --- КОНЕЦ ЛОГИКИ ПРИНЯТИЯ РЕШЕНИЯ ---
+
+        } else {
+            console.error("[DEBUG_APP] ❌ ОШИБКА: message.result отсутствует или не является объектом!");
+        }
+    }
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
+
+    // ... здесь может быть обработка других типов сообщений ...
+    // (остальной код application.js, который не касается AI_ANALYSIS_RESULT, остается без изменений)
+});
+// --- КОНЕЦ ИСПРАВЛЕННОГО КОДА ---
 /**
  * @param {HTMLElement} element
  * @param {string} reason

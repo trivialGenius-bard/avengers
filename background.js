@@ -1,172 +1,105 @@
-// background.js - "The Post Office" for Chrome Extension Message Routing
-// Single task: Routing messages between tabs and AI analysis
+// background.js
 
-//import { analyzeText } from './ai-core.js';
+import { analyzeText } from './ai-core.js';
 
-// Message queue for sequential processing
+// --- Хранилище для отслеживания активных вкладок ---
+const activeTabs = new Map();
+// --- Очередь сообщений для обработки ---
 const messageQueue = [];
-let isProcessing = false;
 
-/**
- * Sequential message processor
- * Ensures messages are processed one by one to avoid conflicts
- */
+// --- Функция для обработки сообщений из очереди ---
 async function processMessageQueue() {
-    if (isProcessing || messageQueue.length === 0) return;
+    if (messageQueue.length === 0) return;
 
-    isProcessing = true;
-    console.log(`Processing message queue (${messageQueue.length} messages)`);
+    const messageData = messageQueue.shift();
+    const { message, sender, sendResponse } = messageData;
 
-    while (messageQueue.length > 0) {
-        const { message, sender, sendResponse } = messageQueue.shift();
+    try {
+        console.log(`📬 Processing queued AI request for tab ${sender.tab?.id}`);
+        const results = await sendAIAnalysisRequest(sender.tab?.id, message.text, message.aiSettings);
+        console.log(`✅ Analysis completed for tab ${sender.tab?.id}`, results);
 
-        try {
-            console.log(`Processing message from tab ${sender.tab?.id}:`, message.type);
-            const result = await handleMessage(message, sender);
-
-            // Send response back to original tab
-            if (sender.tab?.id) {
-                chrome.tabs.sendMessage(sender.tab.id, {
-                    type: 'AI_ANALYSIS_RESPONSE',
-                    requestId: message.requestId,
-                    result,
-                    success: true
-                });
-            }
-
-            // Also call sendResponse for direct communication
-            if (sendResponse) {
-                sendResponse({ success: true, result });
-            }
-
-        } catch (error) {
-            console.error(`❌ Error processing message from tab ${sender.tab?.id}:`, error);
-
-            const errorResponse = {
-                type: 'AI_ANALYSIS_ERROR',
-                requestId: message.requestId,
-                error: error.message,
-                success: false
-            };
-
-            if (sender.tab?.id) {
-                chrome.tabs.sendMessage(sender.tab.id, errorResponse);
-            }
-
-            if (sendResponse) {
-                sendResponse(errorResponse);
-            }
-        }
-    }
-
-    isProcessing = false;
-    console.log(`✅ Message queue processing complete`);
-}
-
-/**
- * Handle individual messages based on type
- */
-async function handleMessage(message, sender) {
-    const startTime = Date.now();
-
-    switch (message.type) {
-        case 'AI_ANALYZE_TEXT':
-            console.log(`🔍 AI Analysis request from tab ${sender.tab?.id}`);
-            console.log(`📝 Text: "${message.text}"`);
-            console.log(`⚙️ Settings:`, message.aiSettings);
-
-            /*const analysisResult = await analyzeText({
-                text: message.text,
-                aiSettings: message.aiSettings
-            });*/
-
-            const processingTime = Date.now() - startTime;
-            console.log(`✅ Analysis completed in ${processingTime}ms for tab ${sender.tab?.id}`);
-
-            return {
-                type: 'AI_ANALYSIS_COMPLETE',
-                results: 5, //analysisResult,
-                processingTime,
-                tabId: sender.tab?.id
-            };
-
-        case 'PING':
-            console.log(`🏓 Ping from tab ${sender.tab?.id}`);
-            return {
-                type: 'PONG',
-                timestamp: Date.now(),
-                tabId: sender.tab?.id
-            };
-
-        case 'GET_QUEUE_STATUS':
-            return {
-                type: 'QUEUE_STATUS',
-                queueLength: messageQueue.length,
-                isProcessing,
-                tabId: sender.tab?.id
-            };
-
-        default:
-            throw new Error(`Unknown message type: ${message.type}`);
+        // Отправляем результат через sendResponse
+        sendResponse({
+            type: "AI_ANALYSIS_COMPLETE",
+            success: true,
+            results: results,
+            requestId: message.requestId
+        });
+        console.log(`📨 Analysis result sent to tab ${sender.tab?.id}`);
+    } catch (error) {
+        console.error(`❌ Error processing message from tab ${sender.tab?.id}:`, error);
+        // Отправляем ошибку через sendResponse
+        sendResponse({
+            type: "AI_ANALYSIS_ERROR",
+            success: false,
+            error: error.message || 'Unknown error during AI analysis',
+            requestId: message.requestId
+        });
     }
 }
 
-/**
- * Chrome runtime message listener - The main "Post Office" routing function
- */
+// --- Функция для отправки запроса на AI-анализ ---
+async function sendAIAnalysisRequest(tabId, text, aiSettings) {
+    try {
+        console.log(`🧠 Initiating AI analysis for tab ${tabId} with settings:`, aiSettings);
+        const results = await analyzeText({ text, aiSettings });
+        console.log(`🧠 AI analysis results for tab ${tabId}:`, results);
+        return results;
+    } catch (error) {
+        console.error(`🧠 Error in AI analysis for tab ${tabId}:`, error);
+        throw error; // Перебрасываем ошибку для обработки выше
+    }
+}
+
+// --- Обработчик входящих сообщений ---
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log(`📬 Message received from tab ${sender.tab?.id}:`, message.type);
 
-    // Add message to queue for sequential processing
-    messageQueue.push({ message, sender, sendResponse });
+    if (message.type === "AI_ANALYZE_TEXT") {
+        console.log(`🔍 AI Analysis request from tab ${sender.tab?.id}`);
+        console.log(`📝 Text: "${message.text}"`);
+        console.log(`⚙️ Settings:`, message.aiSettings);
 
-    // Start processing queue
-    processMessageQueue();
+        // ВАЖНО: Помещаем сообщение в очередь и возвращаем true для асинхронной обработки
+        messageQueue.push({ message, sender, sendResponse });
+        processMessageQueue(); // Начинаем обработку
+        return true; // Указывает Chrome, что ответ будет отправлен асинхронно
+    }
 
-    // Return true to indicate we'll send response asynchronously
-    return true;
+    // Обработка других типов сообщений (если есть)
+    // ...
+
+    // Для других сообщений не нужно возвращать true/sendResponse, если они не асинхронные
 });
 
-/**
- * Tab management - Track active tabs for better routing
- */
-const activeTabs = new Set();
-
+// --- Обработчики жизненного цикла вкладок ---
 chrome.tabs.onCreated.addListener((tab) => {
-    activeTabs.add(tab.id);
+    activeTabs.set(tab.id, { url: tab.url, title: tab.title });
     console.log(`📋 Tab ${tab.id} created. Active tabs: ${activeTabs.size}`);
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete' && tab.url) {
+        activeTabs.set(tabId, { url: tab.url, title: tab.title });
+        console.log(`🔄 Tab ${tabId} updated. URL: ${tab.url}`);
+    }
 });
 
 chrome.tabs.onRemoved.addListener((tabId) => {
     activeTabs.delete(tabId);
-    console.log(`🗑️ Tab ${tabId} removed. Active tabs: ${activeTabs.size}`);
-
-    // Clean up any pending messages for removed tab
-    const remainingMessages = messageQueue.filter(item => item.sender.tab?.id !== tabId);
-    const removedCount = messageQueue.length - remainingMessages.length;
-
-    if (removedCount > 0) {
-        console.log(`🧹 Cleaned up ${removedCount} pending messages for removed tab ${tabId}`);
-        messageQueue.length = 0;
-        messageQueue.push(...remainingMessages);
-    }
+    console.log(`🗑️ Tab ${tabId} closed. Active tabs: ${activeTabs.size}`);
 });
 
-/**
- * Extension startup
- */
-chrome.runtime.onStartup.addListener(() => {
-    console.log(`🚀 Background script started - "The Post Office" is open for business`);
-});
-
+// --- Инициализация ---
 chrome.runtime.onInstalled.addListener(() => {
     console.log(`⚡ Extension installed - Background routing service initialized`);
 });
 
-// Export functions for testing
+// Экспорт функций для тестирования (если необходимо)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        handleMessage,
+        // handleMessage, // handleMessage больше не используется напрямую
         processMessageQueue,
         messageQueue,
         activeTabs
