@@ -21,7 +21,7 @@
         "storage"
     ],
     "web_accessible_resources": [{
-        "resources": ["models/*", "images/*"],
+        "resources": ["models/*", "models/**/*", "images/*"],
         "matches": ["<all_urls>"]
     }],
     "browser_specific_settings": {
@@ -30,7 +30,10 @@
         }
     },
     "background": {
-        "service_worker": "background.js",
+        "service_worker": "dist/background.bundle.js",
         "type": "module"
+    },
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
     }
 }

@@ -2,249 +2,6 @@ var aiEnabled = true;
 // @ts-check
 /// <reference path="shared.js" />
 
-const kittens = [{
-        "name": "1",
-        "src": "https://unsplash.com/photos/Y0WXj3xqJz0"
-    },
-    {
-        "name": "2",
-        "src": "https://unsplash.com/photos/WNoYQaAtCfo"
-    },
-    {
-        "name": "3",
-        "src": "https://unsplash.com/photos/uhnZZUaTIOs"
-    },
-    {
-        "name": "4",
-        "src": "https://unsplash.com/photos/bhonzdJMVjY"
-    },
-    {
-        "name": "5",
-        "src": "https://unsplash.com/photos/lAjk-UJa85c"
-    },
-    {
-        "name": "6",
-        "src": "https://unsplash.com/photos/klH-f7mw2Ws"
-    },
-    {
-        "name": "7",
-        "src": "https://unsplash.com/photos/_867Jy8LCkI"
-    },
-    {
-        "name": "8",
-        "src": "https://unsplash.com/photos/7nPxC8id3Ss"
-    },
-    {
-        "name": "9",
-        "src": "https://unsplash.com/photos/eSceitc-s30"
-    },
-    {
-        "name": "10",
-        "src": "https://unsplash.com/photos/MJymGVEazyY"
-    },
-    {
-        "name": "11",
-        "src": "https://unsplash.com/photos/jMOSPjsZXtg"
-    },
-    {
-        "name": "12",
-        "src": "https://unsplash.com/photos/ZJWUZ6JKAF0"
-    },
-    {
-        "name": "13",
-        "src": "https://unsplash.com/photos/rxvocsh0DUw"
-    },
-    {
-        "name": "14",
-        "src": "https://unsplash.com/photos/OmWw4SfE2DI"
-    },
-    {
-        "name": "15",
-        "src": "https://unsplash.com/photos/Px2Y-sio6-c"
-    },
-    {
-        "name": "16",
-        "src": "https://unsplash.com/photos/bXnoQq1sIBM"
-    },
-    {
-        "name": "17",
-        "src": "https://unsplash.com/photos/WHTLPrTPBk0"
-    },
-    {
-        "name": "18",
-        "src": "https://unsplash.com/photos/7qNZYwUbPic"
-    },
-    {
-        "name": "19",
-        "src": "https://unsplash.com/photos/VpzlatUJFfo"
-    },
-    {
-        "name": "20",
-        "src": "https://unsplash.com/photos/SAKLELG-pO8"
-    }
-];
-const puppies = [{
-        "name": "1",
-        "src": "https://unsplash.com/photos/fk4tiMlDFF0"
-    },
-    {
-        "name": "2",
-        "src": "https://unsplash.com/photos/9LkqymZFLrE"
-    },
-    {
-        "name": "3",
-        "src": "https://unsplash.com/photos/atOlntWcO4k"
-    },
-    {
-        "name": "4",
-        "src": "https://unsplash.com/photos/Qb7D1xw28Co"
-    },
-    {
-        "name": "5",
-        "src": "https://unsplash.com/photos/k4vhuUHv08o"
-    },
-    {
-        "name": "6",
-        "src": "https://unsplash.com/photos/eoqnr8ikwFE"
-    },
-    {
-        "name": "7",
-        "src": "https://unsplash.com/photos/wxfZi8eYdEk"
-    },
-    {
-        "name": "8",
-        "src": "https://unsplash.com/photos/m8v7BDLV8yE"
-    },
-    {
-        "name": "9",
-        "src": "https://unsplash.com/photos/z_U6bPp_Rjg"
-    },
-    {
-        "name": "10",
-        "src": "https://unsplash.com/photos/zr0beNrnvgQ"
-    },
-    {
-        "name": "11",
-        "src": "https://unsplash.com/photos/vMNr5gbeeTk"
-    },
-    {
-        "name": "12",
-        "src": "https://unsplash.com/photos/ORzQG8jKOO4"
-    },
-    {
-        "name": "13",
-        "src": "https://unsplash.com/photos/TzjMd7i5WQI"
-    },
-    {
-        "name": "14",
-        "src": "https://unsplash.com/photos/DsGeUBaJPwc"
-    },
-    {
-        "name": "15",
-        "src": "https://unsplash.com/photos/JK8w20Zantg"
-    },
-    {
-        "name": "16",
-        "src": "https://unsplash.com/photos/oO5MBxRCadY"
-    },
-    {
-        "name": "17",
-        "src": "https://unsplash.com/photos/6uPsI12Xqjk"
-    },
-    {
-        "name": "18",
-        "src": "https://unsplash.com/photos/AsCYNjt6IF0"
-    },
-    {
-        "name": "19",
-        "src": "https://unsplash.com/photos/7T8ammfU8-s"
-    },
-    {
-        "name": "20",
-        "src": "https://unsplash.com/photos/VQPD1fc_Y8g"
-    }
-];
-const hedgehogs = [{
-        "name": "1",
-        "src": "https://unsplash.com/photos/D09Nooc3XQw"
-    },
-    {
-        "name": "2",
-        "src": "https://unsplash.com/photos/OMCgkp1oZ3Q"
-    },
-    {
-        "name": "3",
-        "src": "https://unsplash.com/photos/aM7r5lqKhiY"
-    },
-    {
-        "name": "4",
-        "src": "https://unsplash.com/photos/eHMLxD3W_m4"
-    },
-    {
-        "name": "5",
-        "src": "https://unsplash.com/photos/8wkkhqEYN0A"
-    },
-    {
-        "name": "6",
-        "src": "https://unsplash.com/photos/k_E7DpVgftw"
-    },
-    {
-        "name": "7",
-        "src": "https://unsplash.com/photos/iJ9o00UeAWk"
-    },
-    {
-        "name": "8",
-        "src": "https://unsplash.com/photos/GXMr7BadXQo"
-    },
-    {
-        "name": "9",
-        "src": "https://unsplash.com/photos/dktikEL51dM"
-    },
-    {
-        "name": "10",
-        "src": "https://unsplash.com/photos/g5tj75PJ4w4"
-    },
-    {
-        "name": "11",
-        "src": "https://unsplash.com/photos/MrCsc_ZL5dU"
-    },
-    {
-        "name": "12",
-        "src": "https://unsplash.com/photos/QWELA5fl1KY"
-    },
-    {
-        "name": "13",
-        "src": "https://unsplash.com/photos/6apx2KP_SEo"
-    },
-    {
-        "name": "14",
-        "src": "https://unsplash.com/photos/zjHbH8vkhgk"
-    },
-    {
-        "name": "15",
-        "src": "https://unsplash.com/photos/S6BR5GOqB4A"
-    },
-    {
-        "name": "16",
-        "src": "https://unsplash.com/photos/60QYdXjUd8o"
-    },
-    {
-        "name": "17",
-        "src": "https://unsplash.com/photos/lO9UKYIbV_g"
-    },
-    {
-        "name": "18",
-        "src": "https://unsplash.com/photos/qbFyc2w9q90"
-    },
-    {
-        "name": "19",
-        "src": "https://unsplash.com/photos/jczICIeZtos"
-    },
-    {
-        "name": "20",
-        "src": "https://unsplash.com/photos/JnZWFenBmx0"
-    }
-];
 
 /** @type {Settings} */
 let settings = new Settings();
@@ -503,10 +260,10 @@ async function match(post) {
             // Define aiSettings (example: enable all models; customize based on user settings)
             console.log("Try AI");
             const aiSettings = {
-                sarcasm: true,
+                sarcasm: false,
                 detoxify: true,
-                depression: true,
-                zeroshot: true
+                depression: false,
+                zeroshot: false
             };
 
             // Generate unique requestId
@@ -524,22 +281,28 @@ async function match(post) {
                         reject(new Error(chrome.runtime.lastError.message));
                     } else {
                         resolve(resp);
+                        console.log("Responce: ", resp.results);
+
                     };
-                    console.log("Responce: ", resp.text)
                 });
             });
 
             // Interpret results (example logic: match if any score > 0.5)
             const results = response.results || {};
+            console.log("Response type: ", response.type, " Results type: ", results.type)
+
             let isMatch = false;
             let matchedWord = null;
 
             // Check each category
             for (const [category, scores] of Object.entries(results)) {
                 const maxScore = Math.max(...(Array.isArray(scores)?scores.flat() : [0])); // Assume scores are arrays
-                if (maxScore > 0.5) { // Threshold; adjust as needed
+                //console.log("max score: ", maxScore)
+
+                if (maxScore > 0.2) { // Threshold; adjust as needed
                     isMatch = true;
                     matchedWord = category; // e.g., "sarcasm" as matchedWord
+                    console.log("Matching result: ", isMatch, ", reason:", matchedWord)
                     break; // Or collect all
                 }
             }
@@ -554,6 +317,61 @@ async function match(post) {
     // No match found in either pass
     return null;
 }
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    // --- ДЕБАГ: Логируем всё входящее сообщение ---
+    console.log("[DEBUG_APP] 1. Получено сообщение в content script (application.js):", message);
+    console.log("[DEBUG_APP] 1a. Тип message:", typeof message);
+    // --- КОНЕЦ ДЕБАГА ---
+
+    // --- ИСПРАВЛЕНИЕ: Правильная обработка AI_ANALYSIS_RESULT ---
+    if (message && message.action === "AI_ANALYSIS_RESULT") {
+        console.log("[DEBUG_APP] 2. Сообщение является результатом AI анализа (AI_ANALYSIS_RESULT).");
+
+        // Извлекаем объект результата, отправленный background.js
+        // Ожидаемый формат: message.result = { isMatch: boolean, matchedWord: string, ... }
+        const analysisResult = message.result;
+
+        console.log("[DEBUG_APP] 3. Содержимое message.result:", analysisResult);
+        console.log("[DEBUG_APP] 3a. Тип message.result:", typeof analysisResult);
+
+        if (analysisResult && typeof analysisResult === 'object') {
+            console.log("[DEBUG_APP] 4. message.result является объектом.");
+
+            // Проверяем флаг isMatch, отправленный background.js после анализа и проверки порогов
+            const isMatch = analysisResult.isMatch;
+            const matchedWord = analysisResult.matchedWord;
+
+            console.log("[DEBUG_APP] 5. isMatch:", isMatch);
+            console.log("[DEBUG_APP] 6. matchedWord:", matchedWord);
+
+            // --- ЛОГИКА ПРИНЯТИЯ РЕШЕНИЯ ---
+            // Если background.js установил isMatch в true, значит, текст соответствует критериям
+            if (isMatch === true) {
+                console.log("[DEBUG_APP] 🚨 ФЛАГ isMatch установлен в TRUE. Применяем блюр.");
+                // --- ВЫЗОВ ФУНКЦИИ БЛЮРА ---
+                // Предполагается, что функция applyBlur определена где-то выше в application.js
+                // и реализует логику скрытия/размытия элементов.
+                if (typeof applyBlur === 'function') {
+                    applyBlur(); // Вызываем функцию блюра
+                    console.log("[DEBUG_APP] ✅ Функция applyBlur() была вызвана.");
+                } else {
+                    console.error("[DEBUG_APP] ❌ Функция applyBlur не найдена!");
+                }
+            } else {
+                console.log("[DEBUG_APP] ✅ ФЛАГ isMatch НЕ установлен (false/undefined). Блюр не применяется.");
+            }
+            // --- КОНЕЦ ЛОГИКИ ПРИНЯТИЯ РЕШЕНИЯ ---
+
+        } else {
+            console.error("[DEBUG_APP] ❌ ОШИБКА: message.result отсутствует или не является объектом!");
+        }
+    }
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
+
+    // ... здесь может быть обработка других типов сообщений ...
+    // (остальной код application.js, который не касается AI_ANALYSIS_RESULT, остается без изменений)
+});
+// --- КОНЕЦ ИСПРАВЛЕННОГО КОДА ---
 /**
  * @param {HTMLElement} element
  * @param {string} reason
@@ -592,27 +410,6 @@ function hidePost(element, reason) {
         });
     } else if (settings.globalMuteAction === "hide") {
         element.classList.add("mutable-hide");
-    } else if (settings.globalMuteAction === "kittens") {
-        element.classList.add("mutable-image-overlay");
-        const kittenSrc = chrome.runtime.getURL(`./images/kittens/${kittens[getIndexFromBag(kittens.length)].name}.jpg`);
-        element.style.setProperty("--overlay-image", `url("${kittenSrc}")`);
-        element.addEventListener("click", function(event) {
-            removeOverlay(element, event);
-        });
-    } else if (settings.globalMuteAction === "puppies") {
-        element.classList.add("mutable-image-overlay");
-        const puppySrc = chrome.runtime.getURL(`./images/puppies/${puppies[getIndexFromBag(puppies.length)].name}.jpg`);
-        element.style.setProperty("--overlay-image", `url("${puppySrc}")`);
-        element.addEventListener("click", function(event) {
-            removeOverlay(element, event);
-        });
-    } else if (settings.globalMuteAction === "hedgehogs") {
-        element.classList.add("mutable-image-overlay");
-        const hedgehogSrc = chrome.runtime.getURL(`./images/hedgehogs/${hedgehogs[getIndexFromBag(hedgehogs.length)].name}.jpg`);
-        element.style.setProperty("--overlay-image", `url("${hedgehogSrc}")`);
-        element.addEventListener("click", function(event) {
-            removeOverlay(element, event);
-        });
     } else {
         console.error(`Unknown global mute action, defaulting to 'blur': ${settings.globalMuteAction}`);
         element.classList.add("mutable-blur");
