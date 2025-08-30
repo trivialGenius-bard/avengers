@@ -769,14 +769,37 @@ class Settings {
 	 * @param {Object<string, WebsiteRule>} [websiteRules]
 	 * @param {boolean} [mutableEnabled]
 	 * @param {boolean} [enabledByDefault]
+предыдущейпр	 * @param {Object} [aiSettings]
 	 */
-	constructor(groups, websiteRules, globalMuteAction="blur", debugMode, mutableEnabled=true, enabledByDefault=true) {
+	constructor(groups, websiteRules, globalMuteAction="blur", debugMode, mutableEnabled=true, enabledByDefault=true, aiSettings) {
 		this.groups = groups ?? { "default": new Group("default", "Default Group", [])};
 		this.websiteRules = websiteRules ?? {};
 		this.globalMuteAction = globalMuteAction;
 		this.debugMode = debugMode ?? false;
 		this.mutableEnabled = mutableEnabled;
 		this.enabledByDefault = enabledByDefault;
+		this.aiSettings = aiSettings ?? {
+			enabled: false,
+			filters: {
+				toxicity: {
+					enabled: false,
+					threshold: 75
+				},
+				depression: {
+					enabled: false,
+					threshold: 70
+				},
+				irony: {
+					enabled: false,
+					threshold: 80
+				},
+				topics: {
+					enabled: false,
+					threshold: 65
+				}
+			},
+			zeroShotTopics: ""
+		};
 	}
 
 	/**
@@ -838,6 +861,48 @@ class Settings {
 			host = host.substring(4);
 		}
 		delete this.websiteRules[host];
+	}
+
+	/**
+	 * Check if AI is enabled
+	 * @returns {boolean}
+	 */
+	isAIEnabled() {
+		return this.aiSettings.enabled;
+	}
+
+	/**
+	 * Check if a specific AI filter is enabled
+	 * @param {string} filterType - The type of filter (toxicity, depression, irony, topics)
+	 * @returns {boolean}
+	 */
+	isAIFilterEnabled(filterType) {
+		return this.aiSettings.enabled && this.aiSettings.filters[filterType]?.enabled;
+	}
+
+	/**
+	 * Get the threshold for a specific AI filter
+	 * @param {string} filterType - The type of filter (toxicity, depression, irony, topics)
+	 * @returns {number}
+	 */
+	getAIFilterThreshold(filterType) {
+		return this.aiSettings.filters[filterType]?.threshold ?? 75;
+	}
+
+	/**
+	 * Get zero-shot topics
+	 * @returns {string}
+	 */
+	getZeroShotTopics() {
+		return this.aiSettings.zeroShotTopics;
+	}
+
+	/**
+	 * Update AI settings
+	 * @param {Object} newAISettings
+	 */
+	updateAISettings(newAISettings) {
+		this.aiSettings = { ...this.aiSettings, ...newAISettings };
 	}
 
 	/**
@@ -918,7 +983,13 @@ class Settings {
 			enabledByDefault = undefined;
 		}
 
-		return new Settings(groups, websiteRules, globalMuteAction, debugMode, mutableEnabled, enabledByDefault);
+		let aiSettings = json.aiSettings;
+		if (aiSettings !== undefined && typeof aiSettings !== "object") {
+			console.warn("Invalid aiSettings property: " + JSON.stringify(json));
+			aiSettings = undefined;
+		}
+
+		return new Settings(groups, websiteRules, globalMuteAction, debugMode, mutableEnabled, enabledByDefault, aiSettings);
 	}
 }
 

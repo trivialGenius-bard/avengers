@@ -2,7 +2,6 @@ var aiEnabled = true;
 // @ts-check
 /// <reference path="shared.js" />
 
-
 /** @type {Settings} */
 let settings = new Settings();
 let shuffledBag = [];
@@ -393,21 +392,58 @@ function hidePost(element, reason) {
             }
         });
     } else if (settings.globalMuteAction === "blur-preview") {
-        element.classList.add("mutable-blur-explanation");
-        element.setAttribute("data-mutable-match", reason);
-        element.addEventListener("click", function(event) {
-            if (element.classList.contains("mutable-blur-explanation")) {
-                element.classList.remove("mutable-blur-explanation");
-                event.stopPropagation();
-                event.preventDefault();
-                // Remove from children too
-                for (let child of element.querySelectorAll(".mutable-blur-explanation")) {
-                    if (child instanceof HTMLElement) {
-                        child.classList.remove("mutable-blur-explanation");
-                    }
-                }
-            }
-        });
+    	// Check if element is already wrapped to prevent duplicate processing
+    	if (element.parentNode && element.parentNode.classList && element.parentNode.classList.contains("mutable-wrapper")) {
+    		return; // Already processed
+    	}
+    	
+    	element.classList.add("mutable-blur");
+    	
+    	// Create wrapper to hold both the element and tag
+    	const wrapper = document.createElement("div");
+    	wrapper.className = "mutable-wrapper";
+    	wrapper.style.cssText = `
+    		position: relative !important;
+    		display: block !important;
+    		width: 100% !important;
+    		margin: 0 !important;
+    		padding: 0 !important;
+    		border: none !important;
+    		background: transparent !important;
+    		box-sizing: border-box !important;
+    		overflow: visible !important;
+    		z-index: 1 !important;
+    	`;
+    	
+    	// Create tag element
+    	const tagElement = document.createElement("div");
+    	tagElement.className = "mutable-trigger-tag";
+    	tagElement.textContent = reason;
+    	
+    	// Insert wrapper before the element
+    	element.parentNode.insertBefore(wrapper, element);
+    	// Move element into wrapper
+    	wrapper.appendChild(element);
+    	// Add tag to wrapper (not to the blurred element)
+    	wrapper.appendChild(tagElement);
+    	
+    	element.addEventListener("click", function(event) {
+    		if (element.classList.contains("mutable-blur")) {
+    			element.classList.remove("mutable-blur");
+    			// Remove wrapper and restore original structure
+    			const parent = wrapper.parentNode;
+    			parent.insertBefore(element, wrapper);
+    			wrapper.remove();
+    			event.stopPropagation();
+    			event.preventDefault();
+    			// Remove from children too
+    			for (let child of element.querySelectorAll(".mutable-blur")) {
+    				if (child instanceof HTMLElement) {
+    					child.classList.remove("mutable-blur");
+    				}
+    			}
+    		}
+    	});
     } else if (settings.globalMuteAction === "hide") {
         element.classList.add("mutable-hide");
     } else {
@@ -489,8 +525,21 @@ function resetPosts() {
         post.removeAttribute(PROCESSED_INDICATOR);
         post.classList.remove("mutable-blur");
         post.classList.remove("mutable-hide");
-        post.classList.remove("mutable-blur-explanation");
         post.classList.remove("mutable-image-overlay");
+        
+        // Check if post is wrapped and restore original structure
+        const wrapper = post.parentNode;
+        if (wrapper && wrapper.querySelector && wrapper.querySelector(".mutable-trigger-tag")) {
+            const grandParent = wrapper.parentNode;
+            if (grandParent) {
+                grandParent.insertBefore(post, wrapper);
+                wrapper.remove();
+            }
+        }
+        
+        // Remove any remaining trigger tags
+        const tags = document.querySelectorAll(".mutable-trigger-tag");
+        tags.forEach(tag => tag.remove());
     }
 }
 
