@@ -1,227 +1,214 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="settings-stylesheet.css"/>
-	</head>
-	<body>
-		<div id="background"></div>
-		<div id="container">
-			<div id="title-container">
-				<div id="title">Comfort Zone</div>
-				<div id="tagline">Blur unwanted content</div>
-				<div id="hackaton-info">Developed for UNESCO Youth Hackaton 2025</div>
-				<div id="hackaton-info">Building MIL Solutions for Impact</div>
-			</div>
-			<div id="websites-window" class="window">
-				<div class="window-top-bar">
-					<div class="window-title">
-						Enable extension
-						<label class="toggle-switch">
-							<input type="checkbox" id="enable-blur" checked>
-								<span class="toggle-inner"></span>
-							</input>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comfort Zone - Settings</title>
+    <link rel="stylesheet" href="settings-stylesheet.css" />
+</head>
+
+<body>
+
+    <div id="background-gradient"></div>
+
+    <div id="container">
+
+        <header id="title-container">
+            <h1 id="title">Comfort Zone</h1>
+            <p id="tagline">A safe space, tailored by you.</p>
+            <p id="hackaton-info">Developed for UNESCO Youth Hackaton 2025: Building MIL Solutions for Impact</p>
+        </header>
+
+        <!-- Main Enable/Disable Card -->
+        <div id="websites-window" class="card">
+            <div class="card-header">
+                <h2 class="card-title">Enable Extension</h2>
+                <label class="toggle-switch">
+						<input type="checkbox" id="enable-blur" checked>
+						<span class="toggle-inner"></span>
+					</label>
+            </div>
+        </div>
+
+        <!-- Trigger Words Card -->
+        <div id="mute-window" class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                </div>
+                <h2 class="card-title">Trigger Words</h2>
+            </div>
+            <div id="groups-container" class="card-content">
+                <div class="group-content mute-list">
+                    <!-- Words will be added here by JS -->
+                    <div class="add-button">
+                        <div class="add-button-text">Add Word</div>
+                        <div class="add-button-plus">+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Settings Card -->
+        <div id="ai-settings-window" class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
+                </div>
+                <h2 class="card-title">AI Content Filters</h2>
+            </div>
+            <div id="ai-settings-content" class="card-content">
+                <div class="settings-block">
+                    <div class="settings-text">Enable AI Analysis</div>
+                    <label class="toggle-switch">
+							<input id="ai-enabled" type="checkbox">
+							<span class="toggle-inner"></span>
 						</label>
-					</div>
-					<div class="window-controls"></div>
-				</div>
-			</div>
-			<div id="mute-window" class="window">
-				<div class="window-top-bar">
-					<div class="window-icon">
-						<svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M4 3H16V17H4V3Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M7 7H13" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M7 10H13" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M7 13H10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</div>
-					<div class="window-title">Trigger words</div>
-					<div class="window-controls"></div>
-				</div>
-				<div id="groups-container" class="window-content">
-					<div class="group-content mute-list">
-						<div class="add-button">
-							<div class="add-button-text">Add word</div>
-							<div class="add-button-plus">+</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="settings-window" class="window">
-				<div class="window-top-bar">
-					<div class="window-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
-							<circle cx="12" cy="12" r="3"></circle>
-							<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
-							</path>
-						</svg>
-					</div>
-					<div class="window-title">Settings</div>
-					<div class="window-controls"></div>
-				</div>
-				<div id="settings-window-content" class="window-content">
-					<div class="settings-block global-settings-block vertical-settings-block">
-						<div class="settings-text">
-							What would you like to do with unwanted content?
-						</div>
-						<div class="select-container">
-							<select id="global-mute-action" class="settings-select">
+                </div>
+
+                <div class="ai-filter-group">
+                    <div class="ai-filter-item">
+                        <div class="ai-filter-header">
+                            <div class="ai-filter-name">Toxicity</div>
+                            <label class="toggle-switch">
+									<input id="toxicity-enabled" type="checkbox">
+									<span class="toggle-inner"></span>
+								</label>
+                        </div>
+                        <div class="ai-filter-slider">
+                            <div class="slider-label-group">
+                                <span>Sensitivity</span>
+                                <span class="slider-value">75%</span>
+                            </div>
+                            <input type="range" id="toxicity-threshold" class="ai-slider" min="50" max="100" value="75">
+                        </div>
+                    </div>
+
+                    <div class="ai-filter-item">
+                        <div class="ai-filter-header">
+                            <div class="ai-filter-name">Depression & Self-Harm</div>
+                            <label class="toggle-switch">
+									<input id="depression-enabled" type="checkbox">
+									<span class="toggle-inner"></span>
+								</label>
+                        </div>
+                        <div class="ai-filter-slider">
+                            <div class="slider-label-group">
+                                <span>Sensitivity</span>
+                                <span class="slider-value">70%</span>
+                            </div>
+                            <input type="range" id="depression-threshold" class="ai-slider" min="50" max="100" value="70">
+                        </div>
+                    </div>
+
+                    <div class="ai-filter-item">
+                        <div class="ai-filter-header">
+                            <div class="ai-filter-name">Sarcasm & Passive-Aggression</div>
+                            <label class="toggle-switch">
+									<input id="irony-enabled" type="checkbox">
+									<span class="toggle-inner"></span>
+								</label>
+                        </div>
+                        <div class="ai-filter-slider">
+                            <div class="slider-label-group">
+                                <span>Sensitivity</span>
+                                <span class="slider-value">80%</span>
+                            </div>
+                            <input type="range" id="irony-threshold" class="ai-slider" min="50" max="100" value="80">
+                        </div>
+                    </div>
+
+                    <div class="ai-filter-item">
+                        <div class="ai-filter-header">
+                            <div class="ai-filter-name">Custom Topic Analysis</div>
+                            <label class="toggle-switch">
+									<input id="topics-enabled" type="checkbox">
+									<span class="toggle-inner"></span>
+								</label>
+                        </div>
+                        <div class="ai-filter-slider">
+                            <div class="slider-label-group">
+                                <span>Sensitivity</span>
+                                <span class="slider-value">65%</span>
+                            </div>
+                            <input type="range" id="topics-threshold" class="ai-slider" min="50" max="100" value="65">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-block vertical-settings-block">
+                    <label for="zero-shot-topics" class="settings-text">Trigger Topics</label>
+                    <div class="input-container">
+                        <input type="text" id="zero-shot-topics" class="settings-text-input" placeholder="e.g., politics, religion, spoilers">
+                    </div>
+                    <div class="settings-hint">Enter topics separated by commas to filter content.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- General Settings Card -->
+        <div id="settings-window" class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </div>
+                <h2 class="card-title">General Settings</h2>
+            </div>
+            <div id="settings-window-content" class="card-content">
+                <div class="settings-block vertical-settings-block">
+                    <label for="global-mute-action" class="settings-text">Action for unwanted content</label>
+                    <div class="select-container">
+                        <select id="global-mute-action" class="settings-select">
 								<option value="blur">Blur them out</option>
 								<option value="blur-preview">Blur with trigger tag</option>
 								<option value="hide">Hide completely</option>
 							</select>
-						</div>
-					</div>
-					<div class="settings-block global-settings-block">
-						<div class="settings-text">
-							Debug Mode
-						</div>
-						<label class="toggle-switch">
+                    </div>
+                </div>
+                <div class="settings-block">
+                    <div class="settings-text">Debug Mode</div>
+                    <label class="toggle-switch">
 							<input id="debug-mode" type="checkbox">
 							<span class="toggle-inner"></span>
 						</label>
-					</div>
-				</div>
-			</div>
-			
-			<div id="ai-settings-window" class="window">
-				<div class="window-top-bar">
-					<div class="window-icon">
-						<svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M3 3H17V17H3V3Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M6 6H14V14H6V6Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M8 3V1 M12 3V1 M8 17V19 M12 17V19 M3 8H1 M3 12H1 M17 8H19 M17 12H19" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-						  </svg>
-					</div>
-					<div class="window-title">AI Settings</div>
-					<div class="window-controls"></div>
-				</div>
-				<div id="ai-settings-content" class="window-content">
-					<div class="settings-block global-settings-block">
-						<div class="settings-text">
-							Enable AI
-						</div>
-						<label class="toggle-switch">
-							<input id="ai-enabled" type="checkbox">
-							<span class="toggle-inner"></span>
-						</label>
-					</div>
-					
-					<div class="ai-filter-group">
-						<div class="ai-filter-item">
-							<div class="ai-filter-header">
-								<div class="ai-filter-name">Toxicity Detection</div>
-								<label class="toggle-switch">
-									<input id="toxicity-enabled" type="checkbox">
-									<span class="toggle-inner"></span>
-								</label>
-							</div>
-							<div class="ai-filter-slider">
-								<div class="slider-label">Sensitivity Threshold</div>
-								<input type="range" id="toxicity-threshold" class="ai-slider" min="50" max="100" value="75">
-								<div class="slider-value">75%</div>
-							</div>
-						</div>
-						
-						<div class="ai-filter-item">
-							<div class="ai-filter-header">
-								<div class="ai-filter-name">Depression Detection</div>
-								<label class="toggle-switch">
-									<input id="depression-enabled" type="checkbox">
-									<span class="toggle-inner"></span>
-								</label>
-							</div>
-							<div class="ai-filter-slider">
-								<div class="slider-label">Sensitivity Threshold</div>
-								<input type="range" id="depression-threshold" class="ai-slider" min="50" max="100" value="70">
-								<div class="slider-value">70%</div>
-							</div>
-						</div>
-						
-						<div class="ai-filter-item">
-							<div class="ai-filter-header">
-								<div class="ai-filter-name">Passive Aggressive Detection</div>
-								<label class="toggle-switch">
-									<input id="irony-enabled" type="checkbox">
-									<span class="toggle-inner"></span>
-								</label>
-							</div>
-							<div class="ai-filter-slider">
-								<div class="slider-label">Sensitivity Threshold</div>
-								<input type="range" id="irony-threshold" class="ai-slider" min="50" max="100" value="80">
-								<div class="slider-value">80%</div>
-							</div>
-						</div>
-						
-						<div class="ai-filter-item">
-							<div class="ai-filter-header">
-								<div class="ai-filter-name">Topic Analysis</div>
-								<label class="toggle-switch">
-									<input id="topics-enabled" type="checkbox">
-									<span class="toggle-inner"></span>
-								</label>
-							</div>
-							<div class="ai-filter-slider">
-								<div class="slider-label">Sensitivity Threshold</div>
-								<input type="range" id="topics-threshold" class="ai-slider" min="50" max="100" value="65">
-								<div class="slider-value">65%</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="settings-block global-settings-block vertical-settings-block">
-						<div class="settings-text">
-							Trigger Topics
-						</div>
-						<div class="input-container">
-							<input type="text" id="zero-shot-topics" class="settings-text-input" placeholder="e.g., politics, religion, sex, etc.">
-						</div>
-						<div class="settings-hint">Enter topics separated by commas to filter content</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="modal-container">
-			<div id="add-word-modal" class="window">
-				<div class="window-top-bar">
-					<div class="window-icon">
-						<svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M9.16666 4.16667L5 7.5H1.66666V12.5H5L9.16666 15.8333V4.16667Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M19.1667 7.5L14.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M14.1667 7.5L19.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-						  </svg>
-					</div>
-					<div class="window-title">Add trigger word</div>
-					<div class="window-controls">
-						<div class="window-button left-window-button"></div>
-						<div class="window-button right-window-button"></div>
-					</div>
-				</div>
-				<div class="window-content">
-					Type in the word or phrase that you wish to blur:
-					<input id="add-word-input" class="settings-text-input keyword-input" type="text" placeholder="eg. tulips">
-					<div class="settings-block">
-						Case sensitive
-						<label class="toggle-switch settings-toggle">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal for adding words (structure unchanged for JS) -->
+    <div id="modal-container">
+        <div id="add-word-modal" class="window">
+            <div class="window-top-bar">
+                <div class="window-icon">
+                    <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.16666 4.16667L5 7.5H1.66666V12.5H5L9.16666 15.8333V4.16667Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.1667 7.5L14.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.1667 7.5L19.1667 12.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="window-title">Add trigger word</div>
+                <div class="window-controls"></div>
+            </div>
+            <div class="window-content">
+                Type in the word or phrase that you wish to blur:
+                <input id="add-word-input" class="settings-text-input keyword-input" type="text" placeholder="eg. tulips">
+                <div class="settings-block">
+                    Case sensitive
+                    <label class="toggle-switch settings-toggle">
 							<input id="add-word-case-sensitive" type="checkbox">
 							<span class="toggle-inner settings-toggle-inner"></span>
 						</label>
-					</div>
-					<div class="button-block">
-						<div id="add-word-submit" class="submit-button">
-							Add
-						</div>
-						<div id="add-word-cancel" class="cancel-button">
-							Close
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="../pako.js"></script>
-		<script src="../shared.js"></script>
-		<script src="settings.js"></script>
-	</body>
+                </div>
+                <div class="button-block">
+                    <div id="add-word-submit" class="submit-button">Add</div>
+                    <div id="add-word-cancel" class="cancel-button">Close</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../pako.js"></script>
+    <script src="../shared.js"></script>
+    <script src="settings.js"></script>
+</body>
+
 </html>
